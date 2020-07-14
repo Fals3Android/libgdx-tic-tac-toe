@@ -31,7 +31,7 @@ public class TicTacToe {
             return;
         }
 
-        if(gameOver == false) {
+        if(!gameOver) {
             setBoardAtRandom();
         }
 

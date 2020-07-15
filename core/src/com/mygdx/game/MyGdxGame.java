@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import game.main.TicTacToe;
+import game.main.Play;
 import game.ui.CreatePlayArea;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	Stage stage;
 	Label roundComplete;
 	Label.LabelStyle textStyle;
-	TicTacToe game = new TicTacToe();
+	Play game = new Play();
 	List<TextButton> buttons;
 
 	@Override
@@ -35,13 +35,15 @@ public class MyGdxGame extends ApplicationAdapter {
 		Gdx.input.setInputProcessor(stage);
 		stage.draw();
 
-		if(game.gameOver == true) {
+		if(game.gameOver && game.gameWinner != -1) {
+			String whoWon = game.gameWinner == 0 ? "Player" : "AI";
 			BitmapFont font	= new BitmapFont();
 			textStyle = new Label.LabelStyle();
 			textStyle.font = font;
-			roundComplete = new Label("Round Complete", textStyle);
+			roundComplete = new Label("Round Complete: " + whoWon + " wins this match", textStyle);
 			roundComplete.setFontScale(1f, 1f);
 			stage.addActor(roundComplete);
+			return;
 		}
 
 		if(game.currentRandomIndex != -1 && buttons.get(game.currentRandomIndex) != null) {

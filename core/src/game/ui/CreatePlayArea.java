@@ -4,20 +4,20 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import game.main.TicTacToe;
+import game.main.Play;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class CreatePlayArea {
     BitmapFont font;
-    TicTacToe game;
+    Play game;
 
-    public List<TextButton> create(TicTacToe newGame) {
+    public List<TextButton> create(Play newGame) {
         font = new BitmapFont();
         game = newGame;
 
-        List<TextButton> buttons = Arrays.asList(
+        return Arrays.asList(
             createSingleButton("#", 100, 100, 0),
             createSingleButton("#", 200, 100, 1),
             createSingleButton("#", 300, 100, 2),
@@ -28,8 +28,6 @@ public class CreatePlayArea {
             createSingleButton("#", 200, 300, 7),
             createSingleButton("#", 300, 300, 8)
         );
-
-        return buttons;
     }
 
     private TextButton createSingleButton(String text, int positionX, int positionY, final int index) {
@@ -44,10 +42,18 @@ public class CreatePlayArea {
         button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if(game.gameOver == false) {
+                if(!game.gameOver) {
                     game.setBoard(index);
                     button.setText(button.getText().toString().equals("X") ? "O" : "X");
                     game.setBoardAtRandom();
+                    if(game.hasPlayerWonGame(0) != -1) {
+                        game.gameOver = true;
+                        game.gameWinner = 0;
+                    }
+                    if(game.hasPlayerWonGame(1) != -1) {
+                        game.gameOver = true;
+                        game.gameWinner = 1;
+                    }
                 }
             }
         });

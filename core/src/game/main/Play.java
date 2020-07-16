@@ -54,6 +54,10 @@ public class Play {
         }
     }
 
+    public void resetBoard() {
+        board = Arrays.asList(null, null, null, null, null, null, null, null, null);
+    }
+
     public int hasPlayerWonGame(int playerIndex) {
         if(!gameOver) {
             boolean hasWonGame = false;

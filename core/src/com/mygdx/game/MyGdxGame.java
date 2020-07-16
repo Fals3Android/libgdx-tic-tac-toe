@@ -43,6 +43,7 @@ public class MyGdxGame extends ApplicationAdapter {
 			roundComplete = new Label("Round Complete: " + whoWon + " wins this match", textStyle);
 			roundComplete.setFontScale(1f, 1f);
 			stage.addActor(roundComplete);
+			//TODO: create button that resets game
 			return;
 		}
 

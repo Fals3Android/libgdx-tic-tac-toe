@@ -42,9 +42,9 @@ public class CreatePlayArea {
         button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if(!game.gameOver) {
+                if(!game.gameOver && button.getText().toString().equals("#")) {
                     game.setBoard(index);
-                    button.setText(button.getText().toString().equals("X") ? "O" : "X");
+                    button.setText("X");
                     game.setBoardAtRandom();
                     if(game.hasPlayerWonGame(0) != -1) {
                         game.gameOver = true;

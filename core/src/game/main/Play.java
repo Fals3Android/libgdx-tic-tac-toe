@@ -19,6 +19,8 @@ public class Play {
     public boolean gameOver = false;
     public int currentRandomIndex = -1;
     public int gameWinner = -1;
+    public int playerWins = 0;
+    public int aiWins = 0;
 
     public Play() { }
 
@@ -56,6 +58,14 @@ public class Play {
 
     public void resetBoard() {
         board = Arrays.asList(null, null, null, null, null, null, null, null, null);
+    }
+
+    public void resetGame() {
+        resetBoard();
+        gameOver = false;
+        gameWinner = -1;
+        moves = 0;
+        currentRandomIndex = -1;
     }
 
     public int hasPlayerWonGame(int playerIndex) {

@@ -13,7 +13,7 @@ public class CreatePlayArea {
     BitmapFont font;
     Play game;
 
-    public List<TextButton> create(Play newGame) {
+    public List<TextButton> createBoard(Play newGame) {
         font = new BitmapFont();
         game = newGame;
 
@@ -49,14 +49,35 @@ public class CreatePlayArea {
                     if(game.hasPlayerWonGame(0) != -1) {
                         game.gameOver = true;
                         game.gameWinner = 0;
+                        game.playerWins++;
                     }
                     if(game.hasPlayerWonGame(1) != -1) {
                         game.gameOver = true;
                         game.gameWinner = 1;
+                        game.aiWins++;
                     }
                 }
             }
         });
         return button;
+    }
+
+    public TextButton createResetGameButton(Play currentGame) {
+        game = currentGame;
+        TextButton resetGameButton;
+		TextButton.TextButtonStyle textButtonStyle;
+		textButtonStyle = new TextButton.TextButtonStyle();
+		textButtonStyle.font = font;
+        resetGameButton = new TextButton("New Game", textButtonStyle);
+        resetGameButton.setTransform(true);
+        resetGameButton.setScale(2f);
+        resetGameButton.setPosition(100, 450);
+        resetGameButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                game.resetGame();
+            }
+        });
+        return resetGameButton;
     }
 }
